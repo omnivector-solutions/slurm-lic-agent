@@ -1,0 +1,24 @@
+name: slurm-lic-agent
+base: core20
+version: '0.1'
+summary: License management for slurm.
+description: |
+  License mgmt for slurm.
+
+grade: stable
+confinement: classic
+
+apps:
+  slurm-lic-agent:
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.8/site-packages/
+    command: bin/slurm-lic-agent
+    daemon: oneshot
+    timer: "00:00-24:00/288"
+
+parts:
+  slurm-lic-agent:
+    source: .
+    plugin: python
+    python-packages:
+      - wheel
